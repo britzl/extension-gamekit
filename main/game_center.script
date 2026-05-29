@@ -9,7 +9,7 @@ local opponentPlayerIDs
 
 local function display_image(img_width, img_height, img_buffer)
 	local resource_path = go.get("#display", "texture0")
-	local header = {width=img_width, height=img_height, type=resource.TEXTURE_TYPE_2D, format=resource.TEXTURE_FORMAT_RGBA, num_mip_maps=1}
+	local header = {width=img_width, height=img_height, type=graphics.TEXTURE_TYPE_2D, format=graphics.TEXTURE_FORMAT_RGBA, num_mip_maps=1}
 	resource.set_texture(resource_path, header, img_buffer)
 end
 

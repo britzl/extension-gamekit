@@ -14,11 +14,16 @@ local touch_hash
 local set_output_text_hash
 local btn_toggle_profile
 
+local function get_text_metrics_from_node(node)
+	local font = gui.get_font_resource(gui.get_font(node))
+	return resource.get_text_metrics(font, gui.get_text(node), { width = gui.get_size(node).x, line_break = gui.get_line_break(node) })
+end
+
 function init(self)
 	txt_scroll = gui.get_node("output_txt")
 	txt_hit = gui.get_node("stencil")
 	is_txt_pressed = false
-	txt_height = gui.get_text_metrics_from_node(txt_scroll).height
+	txt_height = get_text_metrics_from_node(txt_scroll).height
 	stencil_height = gui.get_size(txt_hit).y
 	txt_position = gui.get_position(txt_scroll)
 	first_position_y = gui.get_position(txt_scroll).y
@@ -55,7 +60,7 @@ function on_message(self, message_id, message, sender)
 			output.text = string.sub(output.text, char_index) -- limit gui text output to display up to 4000 characters only
 			gui.set_text(txt_scroll, output.text)
 		end
-		txt_height = gui.get_text_metrics_from_node(txt_scroll).height
+		txt_height = get_text_metrics_from_node(txt_scroll).height
 		if txt_height > stencil_height then
 			offset_y = txt_height - stencil_height
 			txt_position.y = offset_y

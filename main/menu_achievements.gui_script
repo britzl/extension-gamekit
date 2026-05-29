@@ -32,7 +32,7 @@ local function reset_input()
 end
 
 local function set_ani_caret_position()
-	local blink_x = (gui.get_text_metrics(font_id, txt_string .. ".").width - char_width) + 212 -- 212 is ani_caret starting x position
+	local blink_x = (resource.get_text_metrics(font_id, txt_string .. ".").width - char_width) + 212 -- 212 is ani_caret starting x position
 	gui.set_position(ani_caret, vmath.vector3(blink_x, 1066, 0))
 end
 
@@ -49,8 +49,8 @@ function init(self)
 	msg.post("#", "disable")
 	btn_back = gui.get_node("back/button")
 	txt_input = gui.get_node("input/text")
-	font_id = gui.get_font(txt_input)
-	char_width = gui.get_text_metrics(font_id, ".").width -- char width of "." to concatenate at end of text
+	font_id = gui.get_font_resource(gui.get_font(txt_input))
+	char_width = resource.get_text_metrics(font_id, ".").width -- char width of "." to concatenate at end of text
 	txt_bg = gui.get_node("input/bg")
 	txt_bg_selected = gui.get_node("input/selected")
 	btn_cancel = gui.get_node("input/cancel")
